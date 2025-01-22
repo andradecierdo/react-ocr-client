@@ -1,38 +1,109 @@
-.App {
+.ocr-app {
   text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.file-upload {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f0f0f0;
+  text-align: left;
+
+  .title {
+    font-size: large;
+    font-weight: 600;
+    color: rgb(114, 114, 114);
+  }
+}
+
+.message-status {
+  height: calc(100vh - 90px);
+  background-color: #cecece;
+  line-height: calc(100vh - 90px);
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.ocr-app-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  height: calc(100vh - 90px);
+}
+
+@media only screen and (max-width: 900px) {
+  .ocr-app-container {
+    display: grid;
+  }
+
+  .textarea-container {
+    width: 80%;
+  }
+}
+
+.ocr-image-view {
+  flex: 4;
+  background-color: #afaeae;
+  overflow-y: auto;
+
+  .container {
+    background-color: aliceblue;
+  }
+}
+
+.image-view {
+  position: relative;
+}
+
+.ocr-text-area {
+  flex: 2;
+  background-color: #f9f9f9;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.textarea-container {
+  text-align: left;
+  margin-top: 10px;
+
+  .textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 0;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ocr-text-highlight {
+  position: absolute;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ocr-text-highlight:hover {
+  background-color: rgba(72, 156, 230, 0.466);
+  border-color: rgb(47, 119, 182);
+  border-style: dotted;
+}
+
+.zoom-controls {
+  position: sticky;
+  z-index: 10;
+  padding: 5px;
+  top: 0;
+  text-align: right;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+textarea {
+  font-size: 16px;
+  margin-top: 20px;
 }
