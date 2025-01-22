@@ -14,18 +14,26 @@ type ImageDimension = {
 }
 
 const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => {
-  const [scale, setScale] = useState(1);
-  const [imageDimensions, setImageDimensions] = useState<ImageDimension | null>(null);
-  const [scaledDimensions, setScaledDimensions] = useState<ImageDimension | null>(null);
+  // const [scale, setScale] = useState(1)
+  const [imageDimensions, setImageDimensions] = useState<ImageDimension | null>(null)
+  const [scaledDimensions, setScaledDimensions] = useState<ImageDimension | null>(null)
 
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null)
 
   const MAX_IMAGE_HEIGHT = 1000
   const MAX_IMAGE_WIDTH = 800
 
+  const scaleRef = useRef(1)
   const ZOOM_SIZE = 0.1
+  // use the useRef function to avoid re-rendering when zooming
   const handleZoom = (value: number) => {
-    setScale((prev) => Math.max(0.5, prev + value))
+    const newScale = Math.max(0.5, scaleRef.current + value)
+    scaleRef.current = newScale
+
+    const container = document.getElementById('image-view-container') as HTMLElement
+    if (container) {
+      container.style.transform = `scale(${newScale})`
+    }
   }
 
   const handleClick = (word: OcrWord) => {
@@ -54,23 +62,23 @@ const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => 
     naturalHeight: number,
     maxWidth: number,
     maxHeight: number
-  ): { width: number; height: number } => {
+  ): ImageDimension => {
     const aspectRatio = naturalWidth / naturalHeight;
   
     // If the image is greater than the max dimension
     if (naturalHeight > maxHeight || naturalWidth > maxWidth) {
       if (aspectRatio > 1) {
         // If image is wider
-        return { width: maxWidth, height: maxWidth / aspectRatio };
+        return { width: maxWidth, height: maxWidth / aspectRatio }
       } else {
         // If image is taller
-        return { width: maxHeight * aspectRatio, height: maxHeight };
+        return { width: maxHeight * aspectRatio, height: maxHeight }
       }
     }
   
     // Else, set the original image dimension
-    return { width: naturalWidth, height: naturalHeight };
-  };
+    return { width: naturalWidth, height: naturalHeight }
+  }
 
   // After scaling, the text position (bounding box) should also be ajusted accordingly based on the final image scale,
   // to properly overlay the bounding box to the image.
@@ -93,13 +101,15 @@ const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => 
   return (
     <div className="image-view">
       <div className="zoom-controls">
-        <MdOutlineZoomIn onClick={() => handleZoom(ZOOM_SIZE)} />
-        <MdOutlineZoomOut onClick={() => handleZoom(-ZOOM_SIZE)} />
+        <MdOutlineZoomIn role="zoom-in" onClick={() => handleZoom(ZOOM_SIZE)} />
+        <MdOutlineZoomOut role="zoom-out" onClick={() => handleZoom(-ZOOM_SIZE)} />
       </div>
-      <div className="image-container" style={{ transform: `scale(${scale})` }}>
+      <div id="image-view-container" className="image-container">
         <img
+          id="ocr-uploaded-image"
+          role="uploaded-image"
           src={imageURL}
-          alt="Uploaded"
+          alt="Uploaded Image"
           ref={imageRef}
           onLoad={onLoadImage}
           style={{
@@ -113,6 +123,7 @@ const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => 
           const [x, y, width, height] = getScaledPosition(word.position)
 
           return <div
+            role="word-box"
             key={index}
             className="ocr-text-highlight"
             style={{
