@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import './App.css'
 import OcrImageView from './components/OcrImageView'
 import OcrTextArea from './components/OcrTextArea'
 import { useOcrApi } from './hooks/use-ocr-api'
+// import { stasticResult } from './data'
 
 const App: React.FC = () => {
   const [selectedText, setSelectedText] = useState<string>('')
@@ -18,12 +19,25 @@ const App: React.FC = () => {
 
     setImageURL(URL.createObjectURL(selectedFile))
     processFile(selectedFile)
+
+
   }
+
+  // const ocrWords = useMemo(() => {
+  //   return stasticResult.results.flatMap(o => {
+  //     return o.words.map(w => {
+  //       return {
+  //         text: w.text,
+  //         position: w.position
+  //       }
+  //     })
+  //   })
+  // }, [])
 
   return (
     <div className="ocr-app">
       <div className="file-upload">
-        <input type="file" accept="image/*" onChange={handleFileUpload} />
+        <input role="file-input" type="file" accept="image/*" onChange={handleFileUpload} />
         <div className="title">Optical Character Recognition</div>
       </div>
       {isLoading && <div className="message-status">Loading data....</div>}

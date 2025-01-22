@@ -9,6 +9,7 @@ const OcrTextArea: React.FC<OcrTextAreaProps> = ({ selectedText }) => {
     <div className="textarea-container">
       <label className="label">TextArea</label>
       <textarea
+        role="textarea"
         className="textarea"
         value={selectedText}
         readOnly

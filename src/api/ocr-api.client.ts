@@ -2,7 +2,7 @@ import axios from 'axios'
 import { OcrApiResult } from '../models/ocr'
 import { OcrClient } from './ocr-api'
 
-class OcrApiClient implements OcrClient<OcrApiResult> {
+export class OcrApiClient implements OcrClient<OcrApiResult> {
   private client = axios.create({ baseURL: process.env.REACT_APP_OCR_API_URL })
 
   private async postRequest(formData: FormData, route: string): Promise<OcrApiResult> {
