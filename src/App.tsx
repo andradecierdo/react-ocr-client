@@ -1,9 +1,8 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import OcrImageView from './components/OcrImageView'
 import OcrTextArea from './components/OcrTextArea'
 import { useOcrApi } from './hooks/use-ocr-api'
-// import { stasticResult } from './data'
 
 const App: React.FC = () => {
   const [selectedText, setSelectedText] = useState<string>('')
@@ -19,20 +18,7 @@ const App: React.FC = () => {
 
     setImageURL(URL.createObjectURL(selectedFile))
     processFile(selectedFile)
-
-
   }
-
-  // const ocrWords = useMemo(() => {
-  //   return stasticResult.results.flatMap(o => {
-  //     return o.words.map(w => {
-  //       return {
-  //         text: w.text,
-  //         position: w.position
-  //       }
-  //     })
-  //   })
-  // }, [])
 
   return (
     <div className="ocr-app">
