@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { OcrWord, WordPosition } from '../models/ocr'
-import { MdOutlineZoomIn, MdOutlineZoomOut } from "react-icons/md"
+import { MdOutlineZoomIn, MdOutlineZoomOut } from 'react-icons/md'
 
-interface OcrViewProps {
+interface IOcrViewProps {
   ocrWords: OcrWord[]
   imageURL: string
   onWordClick: (word: string) => void
@@ -13,7 +13,7 @@ type ImageDimension = {
   height: number
 }
 
-const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => {
+const OcrImageView: React.FC<IOcrViewProps> = ({ ocrWords, imageURL, onWordClick }) => {
   const [imageDimensions, setImageDimensions] = useState<ImageDimension | null>(null)
   const [scaledDimensions, setScaledDimensions] = useState<ImageDimension | null>(null)
 
@@ -62,7 +62,7 @@ const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => 
     maxWidth: number,
     maxHeight: number
   ): ImageDimension => {
-    const aspectRatio = naturalWidth / naturalHeight;
+    const aspectRatio = naturalWidth / naturalHeight
   
     // If the image is greater than the max dimension
     if (naturalHeight > maxHeight || naturalWidth > maxWidth) {
@@ -139,4 +139,4 @@ const OcrView: React.FC<OcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => 
   )
 }
 
-export default OcrView
+export default OcrImageView

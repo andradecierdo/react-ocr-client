@@ -52,7 +52,7 @@ describe('App Component', () => {
     })
 
     render(<QueryClientProvider client={queryClient}><App/></QueryClientProvider>)
-    expect(screen.getByText('Loading data....')).toBeInTheDocument()
+    expect(screen.getByText('Processing OCR....')).toBeInTheDocument()
   })
 
   it('calls `processFile` when a file is uploaded', async () => {
