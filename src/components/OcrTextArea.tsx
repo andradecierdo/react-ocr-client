@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface OcrTextAreaProps {
-  selectedText: string;
+interface IOcrTextAreaProps {
+  selectedText: string
 }
 
-const OcrTextArea: React.FC<OcrTextAreaProps> = ({ selectedText }) => {
+const OcrTextArea: React.FC<IOcrTextAreaProps> = ({ selectedText }) => {
   return (
     <div className="textarea-container">
       <label className="label">TextArea</label>
@@ -15,7 +15,7 @@ const OcrTextArea: React.FC<OcrTextAreaProps> = ({ selectedText }) => {
         readOnly
       />
     </div>
-  );
-};
+  )
+}
 
-export default OcrTextArea;
+export default OcrTextArea
