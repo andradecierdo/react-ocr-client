@@ -13,7 +13,7 @@ type ImageDimension = {
   height: number
 }
 
-const OcrImageView: React.FC<IOcrViewProps> = ({ ocrWords, imageURL, onWordClick}) => {
+const OcrImageView: React.FC<IOcrViewProps> = ({ ocrWords, imageURL, onWordClick }) => {
   const [imageDimensions, setImageDimensions] = useState<ImageDimension | null>(null)
   const [scaledDimensions, setScaledDimensions] = useState<ImageDimension | null>(null)
 
