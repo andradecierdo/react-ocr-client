@@ -5,11 +5,12 @@ interface IOcrTextAreaProps {
 }
 
 const OcrTextArea: React.FC<IOcrTextAreaProps> = ({ selectedText }) => {
+  const textAreaRole = 'textarea'
   return (
     <div className="textarea-container">
       <label className="label">TextArea</label>
       <textarea
-        role="textarea"
+        role={textAreaRole}
         className="textarea"
         value={selectedText}
         readOnly
